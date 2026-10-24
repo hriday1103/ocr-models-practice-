@@ -1,4 +1,4 @@
-from pillow import Image, ImageDraw
+from pil import Image, ImageDraw
 import matplotlib.pyplot as plt
 image = Image.new("RGB", (800, 300), "white")
 draw = ImageDraw.Draw(image)
@@ -25,3 +25,14 @@ image.save("sample_id_document.png")
 plt.imshow(image)
 plt.axis("off")
 plt.show()
+
+
+import easyocr
+
+reader = easyocr.Reader(["en"], gpu=False)
+
+results = reader.readtext("sample_document.png")
+
+for result in results:
+    print("Text:", result[1])
+    print("Confidence:", result[2])
